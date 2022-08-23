@@ -1,0 +1,8 @@
+.grid {
+  display: flex;
+}
+
+.row {
+  border: 1px solid black;
+  cursor: pointer;
+}
