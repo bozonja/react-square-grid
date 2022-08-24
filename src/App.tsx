@@ -38,17 +38,22 @@ function App() {
     <div>
       <p>Click on field to get random number:</p>
       <div className="grid">
-        {cols.map((_, i) => (
-          <div key={i}>
-            {rows.map((_, i) => (
-              <Rows
-                key={i}
-                size={size.md}
-                numberOfColsAndRows={numberOfColsAndRows}
-              />
-            ))}
-          </div>
-        ))}
+        {cols.map((_, i) => {
+          return (
+            <div key={i}>
+              {rows.map((_, j) => {
+                console.log(j);
+                return i === 9 && j === 9 ? null : (
+                  <Rows
+                    key={j}
+                    size={size.md}
+                    numberOfColsAndRows={numberOfColsAndRows}
+                  />
+                );
+              })}
+            </div>
+          );
+        })}
       </div>
       {/* //TODO: change sizes by cliking buttons */}
       <p>Choose field size:</p>
