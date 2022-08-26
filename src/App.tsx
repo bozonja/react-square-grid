@@ -14,7 +14,21 @@ function App() {
   // "Max amount of cols or rows is 10!
   const numberOfCols = 10;
   const numberOfRows = 10;
-  const colsAndRows = new Array(numberOfCols * numberOfCols).fill(null);
+  const colsAndRows = Array.from(
+    { length: numberOfCols * numberOfRows },
+    (_, i) => i
+  );
+
+  const shuffleArray = (array: any) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = array[i];
+      array[i] = array[j];
+      array[j] = temp;
+    }
+  };
+
+  shuffleArray(colsAndRows);
 
   const checkNoOfCols = () => {
     if (numberOfCols > 10 || numberOfRows > 10) {
@@ -28,9 +42,6 @@ function App() {
     return <h3 style={{ color: "red" }}>{errorMessage}</h3>;
   }
 
-  // Vrijednosti u poljima se ne smiju ponavljati.
-  // const ranNo = Math.floor(Math.random() * 99) + 1;
-
   return (
     <div>
       <p>Click on the field to get a random number:</p>
@@ -42,8 +53,8 @@ function App() {
           gridTemplateRows: `repeat(${numberOfRows},  ${size.lg})`,
         }}
       >
-        {colsAndRows.map((_, index) => (
-          <GridItem index={index} key={index} />
+        {colsAndRows.map((item, index) => (
+          <GridItem item={item} key={index} />
         ))}
       </div>
       {/* //TODO: change sizes by cliking buttons */}
