@@ -1,8 +1,5 @@
-.grid {
-  display: flex;
-}
-
-.row {
+.grid-item {
   border: 1px solid black;
+  background-color: bisque;
   cursor: pointer;
 }
