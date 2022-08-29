@@ -1,14 +1,11 @@
+import { useState } from "react";
+
 //styles
 import "./App.css";
 //components
 import { GridItem } from "./components/Field";
 
 function App() {
-  const size = {
-    sm: "20px",
-    md: "35px",
-    lg: "50px",
-  };
   const errorMessage =
     "Oops...Max amount of cols or rows is 10! Total number of fields must not exceed 99!";
   // "Max amount of cols or rows is 10!
@@ -19,12 +16,14 @@ function App() {
     (_, i) => i
   );
 
-  const shuffleArray = (array: any) => {
+  const [fieldSize, setFieldSize] = useState("20px");
+
+  const shuffleArray = (array: number[]) => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
-      const temp = array[i];
+      const temporary = array[i];
       array[i] = array[j];
-      array[j] = temp;
+      array[j] = temporary;
     }
   };
 
@@ -46,22 +45,20 @@ function App() {
     <div>
       <p>Click on the field to get a random number:</p>
       <div
-        className="grid-two"
         style={{
           display: "grid",
-          gridTemplateColumns: `repeat(${numberOfCols}, ${size.lg})`,
-          gridTemplateRows: `repeat(${numberOfRows},  ${size.lg})`,
+          gridTemplateColumns: `repeat(${numberOfCols}, ${fieldSize})`,
+          gridTemplateRows: `repeat(${numberOfRows},  ${fieldSize})`,
         }}
       >
         {colsAndRows.map((item, index) => (
           <GridItem item={item} key={index} />
         ))}
       </div>
-      {/* //TODO: change sizes by cliking buttons */}
       <p>Choose field size:</p>
-      <button onClick={() => {}}>Sm</button>
-      <button onClick={() => {}}>Md</button>
-      <button onClick={() => {}}>Lg</button>
+      <button onClick={() => setFieldSize("20px")}>Sm</button>
+      <button onClick={() => setFieldSize("35px")}>Md</button>
+      <button onClick={() => setFieldSize("50px")}>Lg</button>
     </div>
   );
 }

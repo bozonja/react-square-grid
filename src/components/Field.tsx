@@ -2,7 +2,11 @@ import { useState } from "react";
 //styles
 import "../App.css";
 
-export const GridItem = ({ item }: any) => {
+type FieldProps = {
+  item: number;
+};
+
+export const GridItem = ({ item }: FieldProps) => {
   const [pinkBgColor, setPinkBgColor] = useState(false);
   const [showRandomNumber, setShowRandomNumber] = useState(false);
 
